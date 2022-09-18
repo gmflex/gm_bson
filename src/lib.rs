@@ -1,3 +1,11 @@
+/*
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ * You can obtain source code at httsp://github.com/gmflex/gm_bson
+ * 
+ * (C) kithf, 2022
+ */
 #![feature(c_unwind)]
 
 #[macro_use] extern crate gmod;
