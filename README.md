@@ -3,6 +3,32 @@ bson for gmod
 
 ## Docs
 
+### Bson
+
+### bson.as_json
+**Alias**: `bson.as_relaxed_json`<br>
+Attribute, computed on __index call.<br><br>
+Converts BSON to [relaxed extJSON](https://www.mongodb.com/docs/manual/reference/mongodb-extended-json/).
+```lua
+local bsn = bson.from_lua { a = 1 }
+print(bsn.as_json) --> {"a":1}
+```
+
+### bson.as_canonical_json
+Attribute, computed on __index call.<br><br>
+Converts BSON to [canonical extJSON](https://www.mongodb.com/docs/manual/reference/mongodb-extended-json/).
+```lua
+local bsn = bson.from_lua { a = 1 }
+print(bsn.as_canonical_json) --> {"$numberInt":1}
+```
+
+### bson.__tostring(self)
+Metamethod, computed on call.<br><br>
+Same as `bson.as_json`
+```lua
+print(bson.from_lua {a=1}} --> {"a":1}
+```
+
 ### bson.from_lua(value: `any`): `Bson`
 Converts any lua type into Bson.<br>
 **Unsupported types: `function`, `lightuserdata`, `thread`**
@@ -54,16 +80,16 @@ local bin = bson.binary "123"
 ```
 
 ### bson.regex(pattern: `string`, options: `string | nil`): `regex`
-Creates new Regex from given pattern and options, if present.
+Creates new Regex from given pattern and options, if present.<br>
 **Patterns must be in ECMAScript format.**
 ```lua
-local rx = bson.regex("\w*", "i")
+local rx = bson.regex("\\w*", "i")
 -- or 
-local rx = bson.regex("\d+")
+local rx = bson.regex("\\d+")
 ```
 
 ### bson.code(code: `string`): `code`
-Creates new Code from given string.
+Creates new Code from given string.<br>
 **Code must be written in JavaScript**
 ```lua
 local code = bson.code("console.log()")
@@ -82,7 +108,7 @@ local mxk = bson.maxkey()
 ```
 
 ### bson.decimal128(dcml: `string`): `decimal128`
-Creates new Decimal128 from given string.
+Creates new Decimal128 from given string.<br>
 **String must be a valid number**
 ```lua
 local dcml = bson.decimal128 "123"
