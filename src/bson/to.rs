@@ -67,7 +67,11 @@ unsafe fn coerce(lua: State) -> Bson {
             _ => lua.error("Invalid key type")
           };
 
-          doc.insert(key, coerce(lua));
+          doc.insert(if key.starts_with("_") {
+            format!("${}", key[1..])
+          } else {
+            key.to_string()
+          }, coerce(lua));
           lua.pop();
         }
 
